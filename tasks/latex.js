@@ -11,9 +11,9 @@
 module.exports = function(grunt) {
 
   var latex = require('./lib/latex').init(grunt);
+  var async = grunt.util.async;
 
   function compile(args, cb) {
-    console.log( args );
     var child = grunt.util.spawn({
       cmd: args.shift(),
       args: args
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         success = true;
       }
 
-      cb(success);
+      cb();
     });
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
@@ -44,16 +44,16 @@ module.exports = function(grunt) {
     var options = this.options({
       interaction: 'nonstopmode'
     });
-    var cb = this.async();
+    var done = this.async();
     
     var args = latex.buildArgsArray(options);
-    var tmpArgs = args;
+    var tmpArgs;
 
-    this.filesSrc.forEach( function( f ) {
-      tmpArgs = args;
+    async.forEachSeries( this.filesSrc, function( f, cb ) {
+      tmpArgs = args.slice(0);
       tmpArgs.push( f );
       compile( tmpArgs, cb );
-    } );
+    }, done );
 
   });
 

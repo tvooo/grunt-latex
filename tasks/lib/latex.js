@@ -33,7 +33,7 @@ exports.init = function (grunt) {
       'outputFormat'
     ];
 
-    var usedOptions = [];console.log(options);
+    var usedOptions = [];
 
     for( var option in options) {
       var value = options[ option ];
