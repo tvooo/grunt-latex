@@ -19,6 +19,14 @@ grunt.loadNpmTasks('grunt-latex');
 
 ## The "latex" task
 
+### Prerequisites
+
+For this plugin to work, you need to have a LaTeX distribution installed that comes with the ```pdflatex``` command line application. Common LaTeX distributions are:
+
+* [TeX Live (Linux/Windows)](http://www.tug.org/texlive/)
+* [MacTeX (Mac OS)](http://www.tug.org/mactex/)
+* [MiKTex (Windows)](http://miktex.org/)
+
 ### Overview
 In your project's Gruntfile, add a section named `latex` to the data object passed into `grunt.initConfig()`.
 
@@ -31,59 +39,85 @@ grunt.initConfig({
     your_target: {
       // Target-specific file lists and/or options go here.
     },
-  },
-})
+  }
+});
 ```
 
 ### Options
 
-#### options.separator
+Currently, a few of pdflatex' command line options are supported. If you have the need for more, don't hesitate to file an issue on Github.
+
+#### options.interaction
 Type: `String`
-Default value: `',  '`
+Default value: `'nonstopmode'`
 
-A string value that is used to do something with whatever.
+Sets the interaction mode; can be `'nonstopmode'`, `'batchmode'`, `'scrollmode'` or `'errorstopmode'`.
 
-#### options.punctuation
+#### options.draftmode
+Type: `Boolean`
+Default value: `false`
+
+If `true`, the task will run in draft mode, e.g. no output PDF will be generated.
+
+#### options.haltOnError
+Type: `Boolean`
+Default value: `false`
+
+If `true`, the task will stop processing at the first error.
+
+#### options.outputDirectory
 Type: `String`
-Default value: `'.'`
+Default value: `.`
 
-A string value that is used to do something else with whatever else.
+Specifies the directory to write files into.
+
+#### options.outputFormat
+Type: `String`
+Default value: `pdf`
+
+Specifies the output format. Can be either `'pdf'` or `'dvi'`.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+The most simple way to use grunt-latex is to specify only the source LaTeX files to be compiled.
 
 ```js
 grunt.initConfig({
   latex: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    src: ['document.tex']
   },
-})
+});
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+You can set task-specific options, but you can also define different targets with target-specific options.
 
 ```js
 grunt.initConfig({
   latex: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      haltOnError: 'true'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    pdf_target: {
+      options: {
+        outputDirectory: 'dest/pdf'
+      },
+      src: ['document.tex']
     },
-  },
-})
+    dvi_target: {
+      options: {
+        outputDirectory: 'dest/dvi',
+        outputFormat: 'dvi'
+      },
+      src: ['document.tex']
+    }
+  }
+});
 ```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+0.1.0 Initial release

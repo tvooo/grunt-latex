@@ -1,8 +1,7 @@
 exports.init = function (grunt) {
   'use strict';
   var fs = require('fs');
-  var tmp = require('tmp');
-  var dargs = require('dargs');
+  var wrench =  require('wrench');
 
   var exports = {};
 
@@ -28,21 +27,20 @@ exports.init = function (grunt) {
 
     var supportedOptions = [
       'interaction',
-      'draftmode', // true,false
-      'haltOnError', // halt-on-error
+      'draftmode',
+      'haltOnError',
       'outputDirectory',
-      'outputFormat' // pdf or dvi
+      'outputFormat'
     ];
 
-    var usedOptions = [];
-
+    var usedOptions = [];console.log(options);
 
     for( var option in options) {
       var value = options[ option ];
       if ( supportedOptions.indexOf(option) >= 0 ) {
         usedOptions.push( formatOption( option, value ) );
         if ( option === 'outputDirectory' && !fs.existsSync( value ) ) {
-          fs.mkdirSync( value );
+          wrench.mkdirSyncRecursive( value );
         }
       }
     }
@@ -54,8 +52,6 @@ exports.init = function (grunt) {
   // build the array of arguments to build the compass command
   exports.buildArgsArray = function (options) {
     var args = this.extractOptions( options );
-
-    //var path = require('path');
 
     grunt.verbose.writeflags(options, 'Options');
 

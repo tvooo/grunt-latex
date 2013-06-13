@@ -43,7 +43,6 @@ module.exports = function(grunt) {
           outputFormat: 'dvi'
         }
       }
-      
     },
 
     // Unit tests.

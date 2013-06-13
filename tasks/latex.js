@@ -49,8 +49,6 @@ module.exports = function(grunt) {
     var args = latex.buildArgsArray(options);
     var tmpArgs = args;
 
-
-
     this.filesSrc.forEach( function( f ) {
       tmpArgs = args;
       tmpArgs.push( f );
