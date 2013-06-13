@@ -1,6 +1,6 @@
 # grunt-latex
 
-> A Grunt plugin to run LaTeX-related tasks.
+> Compile LaTeX documents using pdflatex.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
