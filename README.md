@@ -77,6 +77,19 @@ Default value: `pdf`
 
 Specifies the output format. Can be either `'pdf'` or `'dvi'`.
 
+#### options.auxDirectory
+**MiKTex only!** (gracefully ignored in other distributions, afaik)
+Type: `String`
+Default value: not set
+
+Specifies a folder to store auxiliary files, so that the source/output folder does not get polluted.
+
+#### options.engine
+Type: `String`
+Default value: `pdflatex`
+
+Allows you to set an alternative binary, instead of pdflatex, e.g. `lualatex`. Alternative binaries may not support all other options, so use at your own risk.
+
 ### Usage Examples
 
 #### Default Options

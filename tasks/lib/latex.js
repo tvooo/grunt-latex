@@ -25,40 +25,49 @@ exports.init = function (grunt) {
       }
     }
 
-    var supportedOptions = [
+    var cmdArgOptions = [
       'interaction',
       'draftmode',
       'haltOnError',
       'outputDirectory',
-      'outputFormat'
+      'outputFormat',
+      'auxDirectory'
     ];
 
-    var usedOptions = [];
+    var usedOptions = [],
+        engine;
 
     for( var option in options) {
       var value = options[ option ];
-      if ( supportedOptions.indexOf(option) >= 0 ) {
+
+      if ( cmdArgOptions.indexOf(option) >= 0 ) {
         usedOptions.push( formatOption( option, value ) );
         if ( option === 'outputDirectory' && !fs.existsSync( value ) ) {
           wrench.mkdirSyncRecursive( value );
         }
       }
+
+      if ( option === 'engine' ) {
+        engine = value;
+      }
     }
 
-    return usedOptions;
+    return [engine, usedOptions];
   };
 
 
   // build the array of arguments to build the compass command
   exports.buildArgsArray = function (options) {
-    var args = this.extractOptions( options );
+    var allOptions = this.extractOptions( options ),
+        engine = allOptions[0],
+        args = allOptions[1];
 
     grunt.verbose.writeflags(options, 'Options');
 
     if (process.platform === 'win32') {
-      args.unshift('pdflatex'); // maybe .exe?
+      args.unshift( engine ); // maybe .exe?
     } else {
-      args.unshift('pdflatex');
+      args.unshift( engine );
     }
 
     return args;

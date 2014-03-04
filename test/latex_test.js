@@ -44,4 +44,20 @@ exports.latex = {
 
     test.done();
   },
+  multi: function(test) {
+    test.expect(1);
+
+    var pdfExists = fs.existsSync( 'tmp/document2.pdf' );
+    test.equal(pdfExists, true, 'Second PDF file has been created');
+
+    test.done();
+  },
+  engine: function(test) {
+    test.expect(1);
+
+    var pdfExists = fs.existsSync( 'tmp/lualatex.pdf' );
+    test.equal(pdfExists, true, 'PDF file has been created using Lualatex');
+
+    test.done();
+  }
 };

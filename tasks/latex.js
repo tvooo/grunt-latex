@@ -42,10 +42,11 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('latex', 'Compile a LaTeX source file to PDF', function () {
     var options = this.options({
-      interaction: 'nonstopmode'
+      interaction: 'nonstopmode',
+      engine: 'pdflatex'
     });
     var done = this.async();
-    
+
     var args = latex.buildArgsArray(options);
     var tmpArgs;
 

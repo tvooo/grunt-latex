@@ -31,16 +31,29 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     latex: {
       pdf: {
-        src: [ 'test/**/*.tex' ],
+        src: [ 'test/document.tex' ],
         options: {
           outputDirectory: 'tmp'
         }
       },
       dvi: {
-        src: [ 'test/**/*.tex' ],
+        src: [ 'test/document.tex' ],
         options: {
           outputDirectory: 'tmp',
           outputFormat: 'dvi'
+        }
+      },
+      multi: {
+        src: [ 'test/**/*.tex' ],
+        options: {
+          outputDirectory: 'tmp',
+        }
+      },
+      lua: {
+        src: [ 'test/lualatex.tex' ],
+        options: {
+          outputDirectory: 'tmp',
+          engine: 'lualatex'
         }
       }
     },
