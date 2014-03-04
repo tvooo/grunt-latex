@@ -12,11 +12,23 @@ module.exports = function(grunt) {
 
   var latex = require('./lib/latex').init(grunt);
   var async = grunt.util.async;
+  var path = require('path');
 
-  function compile(args, cb) {
+  // Shallow object copy, for options
+  function CloneObject( source ) {
+    for (var i in source) {
+      this[i] = source[i];
+    }
+  }
+
+  function compile(args, wd, cb) {
+    console.log( args );
     var child = grunt.util.spawn({
       cmd: args.shift(),
-      args: args
+      args: args,
+      opts: {
+        cwd: wd
+      }
     }, function (err, result, code) {
       var success = code === 0;
 
@@ -47,13 +59,30 @@ module.exports = function(grunt) {
     });
     var done = this.async();
 
-    var args = latex.buildArgsArray(options);
-    var tmpArgs;
-
     async.forEachSeries( this.filesSrc, function( f, cb ) {
-      tmpArgs = args.slice(0);
-      tmpArgs.push( f );
-      compile( tmpArgs, cb );
+      var tmpOptions = new CloneObject(options);
+      var cwd = path.dirname( f );
+      // The CWD fucks up our outputDirectory, let's fix that
+      if ( options['outputDirectory'] ) {
+        var actualOutputDir = path.resolve(
+          cwd, // pdflatex cwd
+          process.cwd(), // go to Grunt cwd
+          options['outputDirectory'] // and to the specified dir
+        );
+
+        if ( !grunt.file.exists( actualOutputDir ) ) {
+          grunt.file.mkdir( actualOutputDir );
+        }
+
+        tmpOptions['outputDirectory'] = actualOutputDir;
+      }
+
+      var args = latex.buildArgsArray(tmpOptions);
+      var tmpArgs = args.slice(0);
+      // Strip directory name from file and supply it as extra cwd arg
+      tmpArgs.push( path.basename( f ) );
+
+      compile( tmpArgs, cwd, cb );
     }, done );
 
   });

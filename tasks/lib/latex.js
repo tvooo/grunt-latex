@@ -1,7 +1,5 @@
 exports.init = function (grunt) {
   'use strict';
-  var fs = require('fs');
-  var wrench =  require('wrench');
 
   var exports = {};
 
@@ -42,9 +40,6 @@ exports.init = function (grunt) {
 
       if ( cmdArgOptions.indexOf(option) >= 0 ) {
         usedOptions.push( formatOption( option, value ) );
-        if ( option === 'outputDirectory' && !fs.existsSync( value ) ) {
-          wrench.mkdirSyncRecursive( value );
-        }
       }
 
       if ( option === 'engine' ) {
