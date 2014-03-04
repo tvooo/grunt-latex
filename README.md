@@ -1,6 +1,6 @@
 # grunt-latex
 
-> Compile LaTeX documents using pdflatex.
+> Compile LaTeX documents using pdflatex and other latex engines.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -27,6 +27,8 @@ For this plugin to work, you need to have a LaTeX distribution installed that co
 * [MacTeX (Mac OS)](http://www.tug.org/mactex/)
 * [MiKTex (Windows)](http://miktex.org/)
 
+From version 0.2.0, it is also possible to set the `engine` parameter to use other commands than `pdflatex`, for example `lualatex`. Please note that not all options may be supported by other engines.
+
 ### Overview
 In your project's Gruntfile, add a section named `latex` to the data object passed into `grunt.initConfig()`.
 
@@ -48,45 +50,45 @@ grunt.initConfig({
 Currently, a few of pdflatex' command line options are supported. If you have the need for more, don't hesitate to file an issue on Github.
 
 #### options.interaction
-Type: `String`
+Type: `String`  
 Default value: `'nonstopmode'`
 
 Sets the interaction mode; can be `'nonstopmode'`, `'batchmode'`, `'scrollmode'` or `'errorstopmode'`.
 
 #### options.draftmode
-Type: `Boolean`
+Type: `Boolean`  
 Default value: `false`
 
 If `true`, the task will run in draft mode, e.g. no output PDF will be generated.
 
 #### options.haltOnError
-Type: `Boolean`
+Type: `Boolean`  
 Default value: `false`
 
 If `true`, the task will stop processing at the first error.
 
 #### options.outputDirectory
-Type: `String`
+Type: `String`  
 Default value: `.`
 
 Specifies the directory to write files into.
 
 #### options.outputFormat
-Type: `String`
-Default value: `pdf`
+Type: `String`  
+Default value: `'pdf'`
 
 Specifies the output format. Can be either `'pdf'` or `'dvi'`.
 
 #### options.auxDirectory
-**MiKTex only!** (gracefully ignored in other distributions, afaik)
-Type: `String`
+**MiKTex only!** (gracefully ignored in other distributions, afaik)  
+Type: `String`  
 Default value: not set
 
 Specifies a folder to store auxiliary files, so that the source/output folder does not get polluted.
 
 #### options.engine
-Type: `String`
-Default value: `pdflatex`
+Type: `String`  
+Default value: `'pdflatex'`
 
 Allows you to set an alternative binary, instead of pdflatex, e.g. `lualatex`. Alternative binaries may not support all other options, so use at your own risk.
 
@@ -133,4 +135,6 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+0.2.0 Multi-engine support
 0.1.0 Initial release
+
