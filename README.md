@@ -92,6 +92,12 @@ Default value: `'pdflatex'`
 
 Allows you to set an alternative binary, instead of pdflatex, e.g. `lualatex`. Alternative binaries may not support all other options, so use at your own risk.
 
+#### options.jobname
+Type: `String`  
+Default value: not set
+
+Set a job name (rename the output files). **Warning: Don't use this option on multiple source files if they are in the same folder! Because they all have the same jobname, they will subsequently overwrite each other's output.**
+
 ### Usage Examples
 
 #### Default Options

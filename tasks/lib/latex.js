@@ -29,7 +29,8 @@ exports.init = function (grunt) {
       'haltOnError',
       'outputDirectory',
       'outputFormat',
-      'auxDirectory'
+      'auxDirectory',
+      'jobname'
     ];
 
     var usedOptions = [],

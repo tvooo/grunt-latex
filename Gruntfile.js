@@ -46,7 +46,7 @@ module.exports = function(grunt) {
       multi: {
         src: [ 'test/**/*.tex' ],
         options: {
-          outputDirectory: 'tmp',
+          outputDirectory: 'tmp'
         }
       },
       lua: {
