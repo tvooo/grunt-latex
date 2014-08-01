@@ -40,7 +40,10 @@ exports.init = function (grunt) {
       var value = options[ option ];
 
       if ( cmdArgOptions.indexOf(option) >= 0 ) {
-        usedOptions.push( formatOption( option, value ) );
+        var formattedOption = formatOption( option, value );
+        if ( formattedOption !== '' ) {
+          usedOptions.push( formattedOption );
+        }
       }
 
       if ( option === 'engine' ) {
