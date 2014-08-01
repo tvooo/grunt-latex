@@ -59,5 +59,10 @@ exports.latex = {
     test.equal(pdfExists, true, 'PDF file has been created using Lualatex');
 
     test.done();
+  },
+  bib: function(test) {
+    var bblExists = fs.existsSync( 'tmp/document.bbl' );
+    test.equal(bblExists, true, 'bibtex run successfully');
+    test.done();
   }
 };

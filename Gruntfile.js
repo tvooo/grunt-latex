@@ -55,6 +55,13 @@ module.exports = function(grunt) {
           outputDirectory: 'tmp',
           engine: 'lualatex'
         }
+      },
+      bib: {
+        src: [ 'tmp/document.aux' ],
+        options: {
+          engine: 'bibtex',
+          interaction: false
+        }
       }
     },
 
