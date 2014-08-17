@@ -55,7 +55,7 @@ Default value: `'nonstopmode'`
 
 Sets the interaction mode; can be `'nonstopmode'`, `'batchmode'`, `'scrollmode'` or `'errorstopmode'`.
 
-#### options.draftmode
+#### options.draftMode
 Type: `Boolean`  
 Default value: `false`
 
