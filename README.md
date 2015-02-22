@@ -98,6 +98,12 @@ Default value: not set
 
 Set a job name (rename the output files). **Warning: Don't use this option on multiple source files if they are in the same folder! Because they all have the same jobname, they will subsequently overwrite each other's output.**
 
+#### options.shellEscape
+Type: `Boolean`  
+Default value: `false`
+
+Enable `\write18{SHELL COMMAND}`. Among other uses, it is sometimes necessary for `epstopdf` to work properly.
+
 ### Usage Examples
 
 #### Default Options

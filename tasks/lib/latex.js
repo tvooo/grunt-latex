@@ -30,7 +30,8 @@ exports.init = function (grunt) {
       'outputDirectory',
       'outputFormat',
       'auxDirectory',
-      'jobname'
+      'jobname',
+      'shellEscape'
     ];
 
     var usedOptions = [],
