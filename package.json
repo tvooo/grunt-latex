@@ -1,7 +1,7 @@
 {
   "name": "grunt-latex",
   "description": "A Grunt plugin to run LaTeX-related tasks.",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/tvooo/grunt-latex",
   "author": {
     "name": "Tim von Oldenburg",
@@ -38,6 +38,11 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin", "latex", "pdf", "pdflatex", "tex", "dvi"
+    "gruntplugin",
+    "latex",
+    "pdf",
+    "pdflatex",
+    "tex",
+    "dvi"
   ]
 }
