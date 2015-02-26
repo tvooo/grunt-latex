@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         success = true;
       }
 
-      cb();
+      cb(success ? null : new Error("Compilation failed with error code: "+code));
     });
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
